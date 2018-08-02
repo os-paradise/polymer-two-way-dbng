@@ -1,0 +1,59 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../my-child.html" />
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
+
+<dom-module id="app-shell">
+  <template>
+    <style>
+      :host {
+        display: block;
+        --my-toolbar-theme: {
+          background-color: olive;
+          border-radius: 4px;
+          border: 1px solid gray;
+        }
+        ;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+    <h1>parent count: {{currentCount}}</h1>
+    <button on-click="incrementParentCount" type="button">Increment parent count</button>
+    <button on-click="decrement" type="button">Decrement parent count</button>
+    <my-child count="{{currentCount}}"></my-child>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class AppShell extends Polymer.Element {
+      static get is() {
+        return 'app-shell';
+      }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'app-shell'
+          },
+          currentCount: {
+            type: Number,
+            value: 0,
+            notify: true
+          }
+        };
+      }
+
+      incrementParentCount() {
+        this.currentCount++;
+      }
+
+      decrement() {
+        this.currentCount--;
+      }
+    }
+
+    window.customElements.define(AppShell.is, AppShell);
+  </script>
+</dom-module>

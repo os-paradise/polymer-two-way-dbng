@@ -1,0 +1,80 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
+
+<dom-module id="my-child">
+
+    <template>
+        <style>
+            :host {
+                --main-color: blue;
+
+            }
+
+            h1 {
+                /* color: var(--main-color); */
+                @apply --my-toolbar-theme;
+            }
+
+            button {
+                @apply --my-toolbar-theme;
+            }
+
+            /*  @media (max-width: 700px) {
+                h1 {
+                    color: red;
+                }
+            } */
+        </style>
+
+        <h1>hello there [[myData.name]]</h1>
+        <h1>child count: {{count}}</h1>
+        <button on-click="decrementCount" type="button">Decrement count</button>
+
+    </template>
+    <script>
+        class MyChild extends Polymer.Element {
+            static get is() {
+                return 'my-child'
+            }
+
+            constructor() {
+                super();
+                this.myData = {
+                    name: 'Osvaldo',
+                    lastName: 'Alcantara'
+                }
+            }
+
+            static get properties() {
+                return {
+                    myData: {
+                        type: Object
+                    },
+                    count: {
+                        type: Number,
+                        notify: true
+                    }
+                }
+            }
+
+            ready() {
+                super.ready();
+
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+            }
+
+            decrementCount() {
+                this.count--
+
+            }
+
+
+        }
+
+        window.customElements.define(MyChild.is, MyChild);
+    </script>
+
+</dom-module>
